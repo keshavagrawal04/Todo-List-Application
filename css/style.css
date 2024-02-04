@@ -1,0 +1,133 @@
+* {
+    padding: 0;
+    font-family: 'Poppins';
+    margin: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url('../images/background.png');
+    background-size: cover;
+}
+
+.card {
+    box-shadow: 2px 2px 10px rgb(70, 70, 252);
+}
+
+.card-body {
+    border-left: 2px solid rgb(70, 70, 252);
+    border-right: 2px solid rgb(70, 70, 252);
+}
+
+input,
+select {
+    box-shadow: none !important;
+}
+
+.heading {
+    font-size: 36px;
+    font-weight: bold;
+    color: #2d2d2d;
+    letter-spacing: 4px;
+    text-shadow: 0px 0px 5px rgb(70, 70, 252);
+}
+
+#edit-title {
+    font-size: 26px;
+    font-weight: bold;
+    color: #2d2d2d;
+    letter-spacing: 2px;
+    text-shadow: 0px 0px 2px rgb(70, 70, 252);
+}
+
+.bx,
+.form-check-input,
+.form-check-label {
+    cursor: pointer !important;
+}
+
+.bxs-edit {
+    color: rgb(149, 244, 54);
+}
+
+.bxs-trash {
+    color: rgb(255, 71, 71);
+}
+
+.badge {
+    background-color: rgb(70, 70, 252);
+}
+
+#todo-count {
+    z-index: 10;
+}
+
+.border {
+    border-color: rgb(70, 70, 252) !important;
+}
+
+.todo-item {
+    border: 2px dashed rgb(70, 70, 252);
+}
+
+#todo-container {
+    overflow: auto;
+}
+
+#todo-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+#todo-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+#todo-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 2px;
+}
+
+.hero-rocket {
+    position: absolute;
+    top: 250px;
+    right: 50px;
+}
+
+.hero-rocket img {
+    position: relative;
+    animation: rocket 2s linear infinite;
+}
+
+@keyframes rocket {
+    0% {
+        left: 20px;
+        bottom: 20px;
+    }
+
+    25% {
+        left: -20px;
+        bottom: 20px;
+    }
+
+    50% {
+        left: -20px;
+        bottom: 0px;
+    }
+
+    75% {
+        left: 0px;
+        bottom: 0px;
+    }
+
+    100% {
+        left: 20px;
+        bottom: 20px;
+    }
+}
+
+/* li {
+    cursor: pointer !important;
+} */

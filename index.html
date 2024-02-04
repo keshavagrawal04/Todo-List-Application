@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <link rel="shortcut icon" href="./images/icon.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <div class="container d-flex justify-content-center">
+        <div class="card col-lg-7 col-xl-5 col-md-9 col-sm-12 p-2">
+            <!-- Header -->
+            <div class="card-header p-0 border border-2">
+                <h2 class="m-2 text-center heading">TODO LIST</h2>
+            </div>
+            <!-- Body -->
+            <div class="card-body">
+                <!-- Add Todo Inputs -->
+                <div class="input-group mb-3">
+                    <input id="todo-input" type="text" class="form-control border border-2"
+                        placeholder="Enter todo item title">
+
+                    <button class="btn text-white border border-2" style="background-color: rgb(70, 70, 252);"
+                        type="button" onclick="addTodo()">Add</button>
+                </div>
+                <!-- Alert For Title Required -->
+                <!-- Filter & Search -->
+                <div class="input-group mb-3">
+                    <input id="search-input" type="text" class="form-control w-25 border border-2"
+                        placeholder="Search todo items" oninput="displayTodos()">
+                    <span id="todo-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
+                        style="background-color: rgb(70, 70, 252);">
+                    </span>
+                    <select class="form-select border border-2" id="filter-select" onchange="displayTodos()">
+                        <option value="all">All</option>
+                        <option value="todo">Todo</option>
+                        <option value="in-progress">In Progress</option>
+                        <option value="done">Done</option>
+                    </select>
+                </div>
+                <!-- Todo Items -->
+                <div id="todo-container" class="border border-2 rounded p-2" style="height: 350px;">
+                    <ul id="todo-list" class="list-group">
+                        <!-- Todo items will be added here -->
+                    </ul>
+                    <div id="todos-alert" class="d-flex align-items-center mt-5 flex-column" role="alert">
+                        <img src="../images/data-not-found.png" alt="not-data-image" width="240px">
+                    </div>
+                </div>
+            </div>
+            <!-- Footer -->
+            <div class="card-footer border border-2 text-center">
+                <h6 class="mb-1">Copyright &copy; 2024</h6>
+                <h6 class="mb-1 d-flex align-items-center justify-content-center">Made By
+                    Keshav Agrawal</h6>
+            </div>
+        </div>
+
+        <!-- Edit Todo Modal -->
+        <div class="modal fade" id="editTodoModal" data-bs-backdrop="static" tabindex="-1"
+            aria-labelledby="editTodoModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 id="edit-title" class="modal-title" id="editTodoModalLabel">Edit Todo</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group mb-3">
+                            <label for="editTodoTitle">Todo Item Title</label>
+                            <input type="text" class="form-control border border-2" id="editTodoTitle">
+                        </div>
+                        <label>Todo Item Status</label>
+                        <div class="form-group mb-3">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input border border-2" type="radio" name="editTodoStatus"
+                                    id="editTodoStatusTodo" value="todo">
+                                <label class="form-check-label" for="editTodoStatusTodo">
+                                    Todo
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input border border-2" type="radio" name="editTodoStatus"
+                                    id="editTodoStatusInProgress" value="in-progress">
+                                <label class="form-check-label" for="editTodoStatusInProgress">
+                                    In Progress
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input border border-2" type="radio" name="editTodoStatus"
+                                    id="editTodoStatusDone" value="done">
+                                <label class="form-check-label" for="editTodoStatusDone">
+                                    Done
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="saveEditedTodo()"
+                            style="background-color: rgb(70, 70, 252);">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hero Rocket -->
+        <div class="hero-rocket d-xl-block d-none">
+            <img src="./images/rocket.png" width="400px" alt="rocket">
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+        <script src="./js/script.js"></script>
+</body>
+
+</html>
